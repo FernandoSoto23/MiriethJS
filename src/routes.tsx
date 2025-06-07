@@ -1,24 +1,25 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import AppLayout from "./layouts/AppLayout";
-import Login from "./views/auth/Login";
 import AuthLayout from "./layouts/AuthLayout";
+import Login from "./views/auth/Login";
 import { HomeView } from "./views/home/Home";
+
 export default function Router() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route element={<AppLayout/>}>
-                    <Route path="/" element={<HomeView/>}/>
-                     <Route path="/home" element={<HomeView/>}/>
+                {/* Rutas públicas o de login */}
+                <Route element={<AuthLayout />}>
+                    <Route path="/auth/login" element={<Login />} />
                 </Route>
-            </Routes>
-            <Routes>
-                <Route element={<AuthLayout/>}>
-                    <Route path="/auth/login" element={<Login/>}/>
+
+                {/* Rutas protegidas o principales */}
+                <Route element={<AppLayout />}>
+                    <Route path="/" element={<HomeView />} />
+                    <Route path="/home" element={<HomeView />} />
                 </Route>
             </Routes>
         </BrowserRouter>
-
-    )
+    );
 }
